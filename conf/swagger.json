@@ -1,0 +1,149 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "API de Libros",
+    "description": "API para gestionar libros"
+  },
+  "host": "localhost:9000",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "books",
+      "description": "Operaciones con libros"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/books": {
+      "get": {
+        "summary": "Obtener todos los libros",
+        "tags": ["books"],
+        "responses": {
+          "200": {
+            "description": "Lista de libros"
+          }
+        }
+      },
+      "post": {
+        "summary": "Crear un nuevo libro",
+        "tags": ["books"],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Book"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Libro creado con éxito"
+          },
+          "400": {
+            "description": "Solicitud incorrecta"
+          }
+        }
+      }
+    },
+    "/books/{id}": {
+      "get": {
+        "summary": "Obtener un libro por ID",
+        "tags": ["books"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Libro obtenido"
+          },
+          "404": {
+            "description": "Libro no encontrado"
+          }
+        }
+      },
+      "put": {
+        "summary": "Actualizar un libro por ID",
+        "tags": ["books"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Book"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Libro actualizado con éxito"
+          },
+          "404": {
+            "description": "Libro no encontrado"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Eliminar un libro por ID",
+        "tags": ["books"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Libro eliminado con éxito"
+          },
+          "404": {
+            "description": "Libro no encontrado"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Book": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "title": {
+          "type": "string"
+        },
+        "author": {
+          "type": "string"
+        },
+        "publishedYear": {
+          "type": "integer"
+        },
+        "isbn": {
+          "type": "string"
+        },
+        "price": {
+          "type": "number"
+        }
+      }
+    }
+  }
+}
